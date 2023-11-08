@@ -6,7 +6,7 @@ const connection = require("../db/connection")
 let addEmployeesQuestions = [
   {
     type: "input",
-    message: "What is the employee's first name",
+    message: "What is the employee's first name?",
     name: "first_name"
   },
   {
