@@ -42,7 +42,6 @@ let updateEmployeeQuestions = [
     name: "employee_id",
     choices: async () => {
       const data = await connection.promise().query("SELECT * FROM employee");
-      console.log(data)
       return data[0].map((employee) => ({value: employee.id, name: employee.first_name + " " + employee.last_name}) )  
     }
   },
@@ -83,7 +82,6 @@ let addRoleQuestions = [
     name: "department_id",
     choices: async () => {
       const data = await connection.promise().query("SELECT * FROM department");
-      console.log(data)
       return data[0].map((department) => ({value: department.id, name: department.name}))
     }
   }
@@ -97,7 +95,6 @@ function start() {
     name: "choice",
     choices: ["View all Employees", "View All Roles", "View All Departments", "Add Employee", "Add Role", "Add Department", "Update Employee Role"]
   }).then( resp => {
-    console.log(resp)
     if(resp.choice === "View all Employees") {
       displayEmployees()
     } else if (resp.choice === "View All Departments") {
@@ -149,6 +146,7 @@ function displayDepartments(){
 
 /////////////////// WORKS /////////////////////////
 function addEmployee(){
+
   inquirer.prompt(addEmployeesQuestions)
   .then(answers => {
     connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answers.first_name, answers.last_name, answers.role_id, answers.manager_id], (err, data) => {
@@ -159,7 +157,7 @@ function addEmployee(){
   })
 }
 
-//////////////// FIX ROLE'S DEPARTMENT//////////////////////////
+//////////////// works //////////////////////////
 function addRole(){
   inquirer.prompt(addRoleQuestions)
   .then(answers => {
